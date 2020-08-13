@@ -59,6 +59,16 @@ EXPOSE 3838
 
 # allow permission
 RUN sudo chown -R shiny:shiny /srv/shiny-server
+RUN sudo chown -R shiny:shiny /home/shiny/.Renviron
+
+USER shiny
+
+# Create a script to pass command line args to python
+RUN echo "#!/bin/bash" > /home/shiny/runme.sh
+RUN echo "env | grep SESSION_SLST >> /home/shiny/.Renviron" >> /home/shiny/runme.sh
+RUN echo "/usr/bin/shiny-server" >> /home/shiny/runme.sh
+RUN ["chmod", "+x", "/home/shiny/runme.sh" ]
 
 # run app
-CMD ["/usr/bin/shiny-server"]
+#CMD [ "/usr/bin/shiny-server"]
+CMD [ "/home/shiny/runme.sh" ]

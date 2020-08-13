@@ -48,26 +48,7 @@ SESSION_PATH <- Sys.getenv("SESSION_PATH")
 
 SESSION_SLST <- Sys.getenv("SESSION_SLST")
 
-SESSION_SLST="s.lst"
-message("SESSION_PATH " , SESSION_PATH , "\n" ) 
-message("SESSION_SLST " , SESSION_SLST , "\n" ) 
-
-# test case
-#use_moonshine = T
-#SESSION_PATH="/Users/smp37/tmp22/data/user1/example1/"
-
-
-
-#
-# temporary fix: hard-code a sample list instead of allowing upload
-#
-
 fixed.sl <- paste( SESSION_PATH, SESSION_SLST , sep="/", collapse = NULL)
-
-#library(aws.s3 , quietly = T )
-#library(lubridate , quietly = T )
-#library(wkb , quietly = T )
-#library(digest , quietly = T )
 
 
 ##
@@ -76,6 +57,10 @@ fixed.sl <- paste( SESSION_PATH, SESSION_SLST , sep="/", collapse = NULL)
 
 if ( use_aws )
 {
+ library(aws.s3 , quietly = T )
+ library(lubridate , quietly = T )
+ library(wkb , quietly = T )
+ library(digest , quietly = T )
  s3BucketName <- "nap-nsrr"
  enc_key <- charToRaw(Sys.getenv('ENCRYPT_KEY'))
  enc_iv <- charToRaw(Sys.getenv('ENCRYPT_IV'))
@@ -90,7 +75,8 @@ if ( use_aws )
 
 
 #
-# temporary fix: point to NAP output directory, where we look for any tables/figures under nap.dir/{id}/
+# point to NAP output directory, where we look for any tables/figures under nap.dir/{id}/
+# not used in moonshine mode
 #
 
 nap.dir <- paste( SESSION_PATH, "nap/", sep="/", collapse = NULL)

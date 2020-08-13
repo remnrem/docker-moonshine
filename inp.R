@@ -35,7 +35,10 @@
   attached.sl <- reactive({
     
     query <- parseQueryString(session$clientData$url_search)
-    
+
+    SESSION_SLST <- Sys.getenv("SESSION_SLST")
+
+    fixed.sl <- paste( SESSION_PATH, SESSION_SLST , sep="/", collapse = NULL)
 
     if ( fixed.sl != "" && ! use_aws )
     {
