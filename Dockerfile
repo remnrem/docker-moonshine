@@ -26,17 +26,18 @@ RUN cd /build \
  && make && make install
 
 # install R packages required 
-RUN R -e "install.packages('shiny', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('shinydashboard', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('shinyFiles', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('DT', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('xtable', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('aws.s3', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('viridis', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('lubridate', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('wkb', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('plotrix', repos='http://cran.rstudio.com/')"
-RUN R -e "install.packages('geosphere', repos='http://cran.rstudio.com/')"
+RUN R -e "install.packages('shiny', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('shinydashboard', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('shinyFiles', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('DT', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('xtable', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('aws.s3', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('viridis', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('lubridate', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('wkb', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('plotrix', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('geosphere', repos='http://cran.rstudio.com/')" \
+ && R -e "install.packages('git2r', repos='http://cran.rstudio.com/')"
 
 RUN cd /build \
  && git clone https://github.com/remnrem/luna-base.git \
