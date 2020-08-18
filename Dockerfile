@@ -48,7 +48,7 @@ RUN cd /build \
  && ln -s /build/luna-base/behead /usr/local/bin/behead \
  && cd /build \
  && R CMD build luna \
- && LUNA_BASE=/build/luna-base FFTW=/build/fftw3 R CMD INSTALL luna_0.24.tar.gz
+ && LUNA_BASE=/build/luna-base FFTW=/build/fftw3 R CMD INSTALL luna_0.24.1.tar.gz
 
 
 COPY *.R /srv/shiny-server/
