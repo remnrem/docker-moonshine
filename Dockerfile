@@ -12,18 +12,11 @@ RUN apt-get update && apt-get install -y \
     libxt-dev \
     libssl-dev \
     libssh2-1-dev \
-    zlib1g-dev 
+    zlib1g-dev \
+    libgit2-dev \
+    libfftw3-dev
 
 ENV DEBIAN_FRONTEND=noninteractive
-
-RUN cd /build \
- && mkdir fftw3 \
- && cd fftw3 \
- && wget http://www.fftw.org/fftw-3.3.8.tar.gz \
- && tar -xzvf fftw-3.3.8.tar.gz \
- && cd fftw-3.3.8 \
- && ./configure --prefix=/build/fftw3 --enable-shared \
- && make && make install
 
 # install R packages required 
 RUN R -e "install.packages('shiny', repos='http://cran.rstudio.com/')" \
@@ -43,13 +36,13 @@ RUN cd /build \
  && git clone https://github.com/remnrem/luna-base.git \
  && git clone https://github.com/remnrem/luna.git \
  && cd luna-base \
- && make FFTW=/build/fftw3 -j 2 \
+ && make -j 2 \
  && ln -s /build/luna-base/luna /usr/local/bin/luna \
  && ln -s /build/luna-base/destrat /usr/local/bin/destrat \
  && ln -s /build/luna-base/behead /usr/local/bin/behead \
  && cd /build \
  && R CMD build luna \
- && LUNA_BASE=/build/luna-base FFTW=/build/fftw3 R CMD INSTALL luna_0.24.1.tar.gz
+ && LUNA_BASE=/build/luna-base R CMD INSTALL luna_0.24.1.tar.gz
 
 
 COPY *.R /srv/shiny-server/
