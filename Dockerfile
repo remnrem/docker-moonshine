@@ -14,7 +14,7 @@ RUN apt-get update && apt-get install -y \
     libssh2-1-dev \
     zlib1g-dev \
     libgit2-dev \
-    libfftw3-dev
+    fftw3-dev
 
 ENV DEBIAN_FRONTEND=noninteractive
 
